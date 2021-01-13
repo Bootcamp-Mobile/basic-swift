@@ -410,11 +410,13 @@ for student in students {
     }
 }
 
+print(studentsPar)
+
 
 print("****** 6 ******")
 // 6.- Crear un diccionario en el que las claves sean nombre de planetas y los valores
 // nombres de estudiantes. Utilizar el listado ya creado de 'students' y el Enum de 'Planet'
-enum Planet: Int {
+enum Planet: Int, CaseIterable {
     case earth // rawValue = 0
     case jupiter // rawValue = 1
     case mercurio // rawValue = 2
@@ -424,21 +426,65 @@ enum Planet: Int {
     case mars // rawValue = 6
 }
 
-var countryName: [Int: String] = [:]
+// Creamos un diccionario con clave de tipo Int y valor de tipo String [Int : String]
+var planetStudent: [Int:String] = [:]
+// Utilizamos allCases para obtener el listado de todos los posibles cases del enum Planet
+// podemos utilizar allCases porque el enum Planet conforma el protocolo CaseIterable
+var planets = Planet.allCases
 
-for student in students {
+// planets -> [Planet.earth, Planet.jupiter, Planet.mercurio, Planet.venus,
+//             Planet.saturn, Planet.urano, Planet.mars]
+// students -> ["Elena", "Adrián", "Natalia", "Sergi", "Belén", "Miguel", "Alex"]
+for (index, student) in students.enumerated() {
+    print("Index \(index), Value \(student)")
+    // Comprobamos que el indice 'index' existe en la lista de 'planets'
+    if(index < planets.count) {
+        let planet = planets[index]
+        planetStudent[planet.rawValue] = student
+    }
 }
 
-// countryName[0] = "David"
-// countryName[Planet.earth.rawValue] = "David"
-// countryName[Planet.mars.rawValue] = "Miguel"
+/*
+ index = 0
+ if(0 < 7) {
+    planets[0] -> earth
+    planetStudent[earth.rawValue -> 0] = "Elena"
+ }
+ 
+ index = 1
+ if(1 < 7) {
+    planets[1] -> jupiter
+    planetStudent[jupiter.rawValue -> 1] = "Adrián"
+ }
+ .
+ .
+ .
+ index = 6
+ if(6 < 7) {
+    planets[6] -> mars
+    planetStudent[mars.rawValue -> 6] = "Alex"
+ }
+ */
+
+print(planetStudent)
+
+
+
+
+// planetStudent[0] = "David"
+// planetStudent[Planet.earth.rawValue] = "David"
+// planetStudent[Planet.mars.rawValue] = "Miguel"
 // [0:"David", 6:"Miguel"]
 
-// countryName[0] -> "David"
-// countryName[Planet.earth.rawValue]
-// countryName[6] -> "Miguel"
-// countryName[Planet.mars.rawValue]
+// planetStudent[0] -> "David"
+// planetStudent[Planet.earth.rawValue]
+// planetStudent[6] -> "Miguel"
+// planetStudent[Planet.mars.rawValue]
 
-//for key in countryName.keys {
+//for key in planetStudent.keys {
 //    print(Planet(rawValue: key))
 //}
+
+print("****** 7 ******")
+// 7.- Escribir en consola el nombre de cada planeta del Enum 'Planet'
+
