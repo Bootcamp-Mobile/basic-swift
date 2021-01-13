@@ -403,8 +403,42 @@ repeat {
 print("****** 5 ******")
 // 5.- Iterar sobre el listado de 'students' y añadir a un nuevo listado todos
 // los estudiantes que tengan un número para de carácteres en su nombre
+var studentsPar: [String] = []
+for student in students {
+    if (student.count % 2 == 0) {
+        studentsPar.append(student)
+    }
+}
 
 
+print("****** 6 ******")
+// 6.- Crear un diccionario en el que las claves sean nombre de planetas y los valores
+// nombres de estudiantes. Utilizar el listado ya creado de 'students' y el Enum de 'Planet'
+enum Planet: Int {
+    case earth // rawValue = 0
+    case jupiter // rawValue = 1
+    case mercurio // rawValue = 2
+    case venus // rawValue = 3
+    case saturn // rawValue = 4
+    case urano // rawValue = 5
+    case mars // rawValue = 6
+}
 
-// 6.- Crear un diccionario en el que las claves sean nombre de países y los valores
-// nombres de estudiantes. Utilizar el listado ya creado de 'students' y el Enum de 'Country'
+var countryName: [Int: String] = [:]
+
+for student in students {
+}
+
+// countryName[0] = "David"
+// countryName[Planet.earth.rawValue] = "David"
+// countryName[Planet.mars.rawValue] = "Miguel"
+// [0:"David", 6:"Miguel"]
+
+// countryName[0] -> "David"
+// countryName[Planet.earth.rawValue]
+// countryName[6] -> "Miguel"
+// countryName[Planet.mars.rawValue]
+
+//for key in countryName.keys {
+//    print(Planet(rawValue: key))
+//}
