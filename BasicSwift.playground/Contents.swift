@@ -108,3 +108,73 @@ print(String(format: "%@ tiene %d años y está en %@",
              name,
              age,
              (bootcampName ?? "")))
+
+
+// ************* Collection Types *************
+
+// Array lista ordenada de datos de tipo de String que pueden estar duplicados
+var array: [String] = ["David", "Elena", "Adrián", "Natalia", "Sergi", "Belén", "Miguel"]
+
+array.count
+array.append("Alex")
+array.append(contentsOf: ["Carlos", "Sara"])
+array.remove(at: 3)
+array.contains("David")
+array.contains("Juan")
+
+array[0]
+array.isEmpty
+
+var arrayDoubles = [1.0, 2.0, 4.0, 1.0, 23.0]
+
+// No se modifica la lista original, se devuelve una copia ordenada
+var sorted = arrayDoubles.sorted()
+arrayDoubles
+
+// Modificamos la lista original y la ordenamos
+arrayDoubles.sort()
+
+
+// Dictionary listado de pares [clave:valor] sin ordenar, las claves son únicas
+var diccionario: [Int:String] = [77 : "David",
+                                 10 : "Elena",
+                                 25 : "Adrián",
+                                 0 : "Elena"]
+
+diccionario.isEmpty
+diccionario.count
+
+diccionario.keys
+diccionario.values
+
+diccionario[77]
+diccionario[1]
+
+diccionario.removeValue(forKey: 0)
+diccionario.count
+
+diccionario[0] = "Elena"
+diccionario.count
+diccionario[0] = "Natalia"
+diccionario.count
+diccionario[0] = nil
+diccionario.count
+
+
+// Set, lista de datos no ordenada con valores únicos
+var setList: Set<String> = []
+
+// Se inserta en la colección
+setList.insert("David")
+// No se inserta en la colección porque ya existe
+setList.insert("David")
+
+setList.count
+setList.removeFirst()
+setList.isEmpty
+
+setList.insert("Sergi")
+setList.count
+
+setList.contains("David")
+
