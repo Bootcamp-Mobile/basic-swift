@@ -427,64 +427,87 @@ enum Planet: Int, CaseIterable {
 }
 
 // Creamos un diccionario con clave de tipo Int y valor de tipo String [Int : String]
-var planetStudent: [Int:String] = [:]
+var planetastudent: [Int:String] = [:]
 // Utilizamos allCases para obtener el listado de todos los posibles cases del enum Planet
 // podemos utilizar allCases porque el enum Planet conforma el protocolo CaseIterable
-var planets = Planet.allCases
+var planetas = Planet.allCases
 
-// planets -> [Planet.earth, Planet.jupiter, Planet.mercurio, Planet.venus,
+// planetas -> [Planet.earth, Planet.jupiter, Planet.mercurio, Planet.venus,
 //             Planet.saturn, Planet.urano, Planet.mars]
 // students -> ["Elena", "Adrián", "Natalia", "Sergi", "Belén", "Miguel", "Alex"]
 for (index, student) in students.enumerated() {
     print("Index \(index), Value \(student)")
-    // Comprobamos que el indice 'index' existe en la lista de 'planets'
-    if(index < planets.count) {
-        let planet = planets[index]
-        planetStudent[planet.rawValue] = student
+    // Comprobamos que el indice 'index' existe en la lista de 'planetas'
+    if(index < planetas.count) {
+        let planet = planetas[index]
+        planetastudent[planet.rawValue] = student
     }
 }
 
 /*
  index = 0
  if(0 < 7) {
-    planets[0] -> earth
-    planetStudent[earth.rawValue -> 0] = "Elena"
+    planetas[0] -> earth
+    planetastudent[earth.rawValue -> 0] = "Elena"
  }
  
  index = 1
  if(1 < 7) {
-    planets[1] -> jupiter
-    planetStudent[jupiter.rawValue -> 1] = "Adrián"
+    planetas[1] -> jupiter
+    planetastudent[jupiter.rawValue -> 1] = "Adrián"
  }
  .
  .
  .
  index = 6
  if(6 < 7) {
-    planets[6] -> mars
-    planetStudent[mars.rawValue -> 6] = "Alex"
+    planetas[6] -> mars
+    planetastudent[mars.rawValue -> 6] = "Alex"
  }
  */
 
-print(planetStudent)
+print(planetastudent)
 
-
-
-
-// planetStudent[0] = "David"
-// planetStudent[Planet.earth.rawValue] = "David"
-// planetStudent[Planet.mars.rawValue] = "Miguel"
+// planetastudent[0] = "David"
+// planetastudent[Planet.earth.rawValue] = "David"
+// planetastudent[Planet.mars.rawValue] = "Miguel"
 // [0:"David", 6:"Miguel"]
 
-// planetStudent[0] -> "David"
-// planetStudent[Planet.earth.rawValue]
-// planetStudent[6] -> "Miguel"
-// planetStudent[Planet.mars.rawValue]
+// planetastudent[0] -> "David"
+// planetastudent[Planet.earth.rawValue]
+// planetastudent[6] -> "Miguel"
+// planetastudent[Planet.mars.rawValue]
 
-//for key in planetStudent.keys {
+//for key in planetastudent.keys {
 //    print(Planet(rawValue: key))
 //}
 
 print("****** 7 ******")
 // 7.- Escribir en consola el nombre de cada planeta del Enum 'Planet'
+for planet in planetas {
+    switch planet {
+        case .earth: print("Tierra")
+        case .jupiter: print("Jupiter")
+        case .mercurio: print("Mercurio")
+        case .venus: print("Venus")
+        case .saturn: print("Saturno")
+        case .urano: print("Urano")
+        case .mars: print("Marte")
+    }
+}
 
+print("****** 7.1 ******")
+enum Planetas: String, CaseIterable {
+    case earth = "Tierra"// rawValue = "Tierra"
+    case jupiter = "Jupiter" // rawValue = "Jupiter"
+    case mercurio = "Mercurio" // rawValue = "Mercurio"
+    case venus = "Venus" // rawValue = "Venus"
+    case saturn = "Saturno" // rawValue = "Saturno"
+    case urano = "Urano" // rawValue = "Urano"
+    case mars = "Marte" // rawValue = "Marte"
+}
+
+var planetsName = Planetas.allCases
+for planet in planetsName {
+    print(planet.rawValue)
+}
