@@ -14,6 +14,7 @@ var variable = str
 variable = "Hola bootcamp!"
 str = "Hola David!"
 
+
 // ************* Types *************
 /*
  String -> Texto -> "Hello Bootcamp"
@@ -25,6 +26,7 @@ str = "Hola David!"
 
 var decimal: Float = 3.14
 var decimal2 = 4.0
+
 
 // ************* Operaciones *************
 
@@ -40,6 +42,7 @@ var division = decimal / Float(decimal2)
 
 // Módulo división
 var resto = 5 % 2
+
 
 // ************* Operaciones Lógicas *************
 /*
@@ -69,3 +72,39 @@ result = (5 > 2 && 4 < 3)
  false || true -> true
  */
 result = !(5 == 2 || 4 != 3)
+
+
+// ************* Optional *************
+// null (Java, Kotlin) = nil (Swift)
+
+// Declaramos variable de tipo opcional con ?
+var bootcampName: String? = "Mobile development"
+// Acceso de forma segura al valor de la variable bootcampName con ?
+bootcampName?.count
+
+bootcampName = nil
+// Valor por defecto al resultado en caso de que bootcampName sea nil
+bootcampName?.count ?? 0
+ 
+var numero1 = 5
+var numero2: Int? = 7
+
+var numero2Unwrapped = numero2 ?? 0
+var sumaOptional = numero1 + numero2Unwrapped
+
+
+// ************* Print *************
+print("HOLA")
+
+var age = 35
+var name = "David"
+print("\(name) tiene \(age) años y está en \(bootcampName ?? "")")
+
+// %d -> Int
+// %f -> float
+// %ld -> Long
+// %@ -> String
+print(String(format: "%@ tiene %d años y está en %@",
+             name,
+             age,
+             (bootcampName ?? "")))
