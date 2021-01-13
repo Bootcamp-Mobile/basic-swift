@@ -241,3 +241,96 @@ countrySpain
 // Obtenemos todos los posibles valores del enum 'Country' al conformar enum Country: CaseIterable
 // Country.allCases
 
+
+// ************* If && Switch *************
+
+if (5 > 0 || 3 == 3 && 0 == 1) {
+    print("5 es mayor que 0")
+} else if (3 == 3) {
+    print("3 igual a 3")
+} else {
+    print("Todo es mentira")
+}
+
+var userAge = 19
+switch (userAge) {
+    case 0...3:
+        print("Bebé")
+        
+    case 3...12:
+        print("Niño")
+        
+    case 12...18:
+        print("Adolescente")
+        
+    case 18...70:
+        print("Adulto")
+        
+    case 70...120:
+        print("Anciano")
+        
+    default:
+        break
+}
+
+switch fontSize {
+    case .small:
+        print("Font size small \(fontSize.rawValue)")
+        
+    case .medium:
+        print("Font size medium \(fontSize.rawValue)")
+        
+    case .big:
+        print("Font size big \(fontSize.rawValue)")
+}
+
+switch userLogin {
+    case .userPassword:
+        print("User login with email and password")
+        
+    default:
+        print("User login with Social Login")
+}
+
+switch countryGermany {
+    case .spain(let salary):
+        print("Salario medio en España es \(salary ?? 0)")
+                
+    case .germany(let salary, let days):
+        print("Salario medio en Alemania es \(salary ?? 0) para \(days) días trabajados")
+
+    default:
+        break
+}
+
+
+// ************* Optionals: if let && guard let *************
+
+// Unwrapped de la variable opcional 'numero2'
+var otroNumero: Int? = nil
+
+// Definimos y creamos dos constantes que solo existen dentro del if 'numeroUnwrapped'
+// y 'otroNumeroUnwrapped'
+if let numeroUnwrapped = numero2,
+   let otroNumeroUnwrapped = otroNumero,
+   (numeroUnwrapped > otroNumeroUnwrapped || otroNumeroUnwrapped > 0),
+   numeroUnwrapped > 5 {
+    print("\(numeroUnwrapped) \(otroNumeroUnwrapped)")
+}
+
+print("Hola")
+
+otroNumero = 10
+func opcional() {
+    guard let numeroUnwrapped = numero2,
+          let otroNumeroUnwrapped = otroNumero,
+          (numeroUnwrapped > otroNumeroUnwrapped || otroNumeroUnwrapped > 0),
+          numeroUnwrapped > 5 else {
+        return
+    }
+    
+    print("\(numeroUnwrapped) \(otroNumeroUnwrapped)")
+}
+
+opcional()
+
