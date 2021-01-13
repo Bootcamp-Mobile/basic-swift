@@ -178,3 +178,66 @@ setList.count
 
 setList.contains("David")
 
+
+// ************* Tuple *************
+var tuplaVar: (user: String?, password: String?) = (nil, nil)
+tuplaVar.0
+tuplaVar.1
+
+tuplaVar.user = "David"
+tuplaVar.password = "123456"
+tuplaVar
+
+
+// ************* Enum *************
+enum LoginType {
+    case userPassword, google, apple, outlook, facebook
+}
+
+var userLogin: LoginType = .apple
+
+enum FontSize: Int {
+    case small = 5
+    case medium = 7
+    case big = 10
+}
+
+var fontSize: FontSize = .medium
+// Accedemos con rawValue al valor asociado al case 'medium'
+fontSize.rawValue
+
+var fontBig = FontSize(rawValue: 10)
+
+
+
+enum Saludos: String {
+    case normal = "Hola"
+    case raro = "Holitaaaa"
+    case otro = "Que pasa!"
+}
+
+var saludosVar: Saludos = .otro
+// Accedemos con rawValue al valor asociado al case 'otro'
+saludosVar.rawValue
+
+var saludoNormal = Saludos(rawValue: "Hola")
+
+
+enum Country {
+    case spain(Int?)
+    case portugal
+    case france
+    case germany(salary: Int?, days: Int)
+    case brazil
+    case italy
+}
+
+var countrySpain = Country.spain(24_000)
+var countryGermany: Country = .germany(salary: 52_000, days: 240)
+
+countryGermany
+countrySpain
+
+// Obtenemos todos los posibles valores del enum 'Country' al conformar enum Country: CaseIterable
+// Country.allCases
+
