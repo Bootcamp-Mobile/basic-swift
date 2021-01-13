@@ -334,3 +334,77 @@ func opcional() {
 
 opcional()
 
+
+// ************* Bucles *************
+var students = ["Elena", "Adrián", "Natalia", "Sergi", "Belén", "Miguel", "Alex"]
+
+print()
+print("************** BUCLES **************")
+print("****** 1 ******")
+for student in students {
+    // 1.- Hacer el print solo de los estudiantes que su nombre contenga una 'e'
+    if(student.contains("e")) {
+        print(student)
+    }
+}
+
+print("****** 2 ******")
+for student in students {
+    // 2.- Hacer el print solo de los estudiantes que su nombre contenga más de 5 letras
+    if(student.count > 5) {
+        print(student)
+    }
+}
+
+print("****** 3 ******")
+// 3.- Escribir en consola todos los números pares entre 1 y 100
+for number in 1...100 where number % 2 == 0 {
+    print(number)
+}
+
+print("****** 4 ******")
+// 4.- Escribir en consola todos los números entre 1 y 100 empezando por 100
+for number in (1...100).reversed() {
+    if(number == 69) {
+        // Con 'break' salimos del bucle y se finaliza las iteraciones
+        break
+    }
+    
+    if(number == 80) {
+        // Con 'continue' saltamos a la siguiente iteración del bucle
+        continue
+    }
+    
+    print(number)
+}
+
+//for number in stride(from: 100.0, to: 1.0, by: -1.5) {
+//    print(number)
+//}
+
+var index = 0
+// 0 < 7 -> true
+// 1 < 7 -> true
+// .
+// .
+// 7 < 7 -> false
+while (index < students.count) {
+    print(students[index])
+    index += 1 // index = index + 1
+}
+
+var indexRepeat = 0
+// Con un bucle 'repeat' nos aseguramos que el bucle siempre se ejecuta al menos 1 vez
+repeat {
+    print(students[indexRepeat])
+    indexRepeat += 1 // indexRepeat = indexRepeat + 1
+} while (indexRepeat < students.count)
+
+print("****** 5 ******")
+// 5.- Iterar sobre el listado de 'students' y añadir a un nuevo listado todos
+// los estudiantes que tengan un número para de carácteres en su nombre
+
+
+
+// 6.- Crear un diccionario en el que las claves sean nombre de países y los valores
+// nombres de estudiantes. Utilizar el listado ya creado de 'students' y el Enum de 'Country'
