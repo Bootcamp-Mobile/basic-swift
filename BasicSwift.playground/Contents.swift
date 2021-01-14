@@ -426,35 +426,49 @@ enum Planet: Int, CaseIterable {
     case mars // rawValue = 6
 }
 
-// Creamos un diccionario con clave de tipo Int y valor de tipo String [Int : String]
-var planetastudent: [Int:String] = [:]
 // Utilizamos allCases para obtener el listado de todos los posibles cases del enum Planet
 // podemos utilizar allCases porque el enum Planet conforma el protocolo CaseIterable
 var planetas = Planet.allCases
+// Creamos un diccionario con clave de tipo Int y valor de tipo String [Int : String]
+var planetaStudent: [Int:String] = [:]
 
 // planetas -> [Planet.earth, Planet.jupiter, Planet.mercurio, Planet.venus,
 //             Planet.saturn, Planet.urano, Planet.mars]
 // students -> ["Elena", "Adrián", "Natalia", "Sergi", "Belén", "Miguel", "Alex"]
+/*
+    index -> 0
+    student -> "Elena"
+ 
+    index -> 1
+    stundet -> "Adrián"
+ 
+    ...
+ 
+    index -> 6
+    student -> "Alex"
+ */
 for (index, student) in students.enumerated() {
-    print("Index \(index), Value \(student)")
+    // print("Index \(index), Value \(student)")
     // Comprobamos que el indice 'index' existe en la lista de 'planetas'
     if(index < planetas.count) {
         let planet = planetas[index]
-        planetastudent[planet.rawValue] = student
+        // planetaStudent.updateValue(student, forKey: planet.rawValue)
+        planetaStudent[planet.rawValue] = student
     }
 }
 
+print(planetaStudent)
 /*
  index = 0
  if(0 < 7) {
     planetas[0] -> earth
-    planetastudent[earth.rawValue -> 0] = "Elena"
+    planetaStudent[earth.rawValue -> 0] = "Elena"
  }
  
  index = 1
  if(1 < 7) {
     planetas[1] -> jupiter
-    planetastudent[jupiter.rawValue -> 1] = "Adrián"
+    planetaStudent[jupiter.rawValue -> 1] = "Adrián"
  }
  .
  .
@@ -462,23 +476,21 @@ for (index, student) in students.enumerated() {
  index = 6
  if(6 < 7) {
     planetas[6] -> mars
-    planetastudent[mars.rawValue -> 6] = "Alex"
+    planetaStudent[mars.rawValue -> 6] = "Alex"
  }
  */
 
-print(planetastudent)
-
-// planetastudent[0] = "David"
-// planetastudent[Planet.earth.rawValue] = "David"
-// planetastudent[Planet.mars.rawValue] = "Miguel"
+// planetaStudent[0] = "David"
+// planetaStudent[Planet.earth.rawValue] = "David"
+// planetaStudent[Planet.mars.rawValue] = "Miguel"
 // [0:"David", 6:"Miguel"]
 
-// planetastudent[0] -> "David"
-// planetastudent[Planet.earth.rawValue]
-// planetastudent[6] -> "Miguel"
-// planetastudent[Planet.mars.rawValue]
+// planetaStudent[0] -> "David"
+// planetaStudent[Planet.earth.rawValue]
+// planetaStudent[6] -> "Miguel"
+// planetaStudent[Planet.mars.rawValue]
 
-//for key in planetastudent.keys {
+//for key in planetaStudent.keys {
 //    print(Planet(rawValue: key))
 //}
 
@@ -511,3 +523,57 @@ var planetsName = Planetas.allCases
 for planet in planetsName {
     print(planet.rawValue)
 }
+
+
+// ************* Functions *************
+print("****** Functions ******")
+/* func nombreFuncion(parametroEntrada: TipoParametro) -> TipoValorDevuelto {
+
+   }
+ */
+
+func printHello() {
+    print("Hello")
+}
+
+printHello()
+
+// Al parámetro de entrada 'age' le damos un valor por defecto nil
+func printHelloStudent(name: String, age: Int = 0) {
+    print("Hello \(name) age \(String(describing: age))")
+}
+
+printHelloStudent(name: "Belén", age: 256)
+printHelloStudent(name: "Adrián")
+
+// Añadimos etiquetas a los parámetros 'email' y 'password'
+func login(email user: String, password pass: String) -> Bool {
+    print("Login \(user) password \(pass)")
+    
+    if(user.isEmpty || pass.isEmpty) {
+        return false
+    } else {
+        return true
+    }
+}
+
+let isLogged = login(email: "David",
+                     password: "123456")
+
+// Función que devuelve un valor de tipo Int  ' -> Int '
+func increment(_ number: Int, by increment: Int) -> Int {
+    let result = number + increment
+    print("\(result)")
+    
+    return result
+}
+
+let resultIncrement = increment(3, by: 5) // -> 3 + 5 = 8
+print("El resultado del incremento es \(resultIncrement)")
+
+
+print("****** 8 ******")
+// 8.- Crear una función que me devuelva los estudiantes con más de 5 letras
+// 8.1.- Crear una función que me devuelva los estudiantes que el número de letras de su nombre sea par
+// 8.2.- Crear una función que me devuelva el número de estudiantes que su nombre contenga más de 5 letras
+// 8.3.- Crear una función que me devuelva el número de estudiantes que el número de letras de su nombre sea par
