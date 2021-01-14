@@ -574,6 +574,73 @@ print("El resultado del incremento es \(resultIncrement)")
 
 print("****** 8 ******")
 // 8.- Crear una función que me devuelva los estudiantes con más de 5 letras
+func studentsName5(_ estudiantes: [String]) -> [String] {
+    var studentsResult: [String] = []
+    
+    for student in estudiantes {
+        if(student.count > 5) {
+            studentsResult.append(student)
+        }
+    }
+    
+    return studentsResult
+}
+
+let studentsResult = studentsName5(students)
+
 // 8.1.- Crear una función que me devuelva los estudiantes que el número de letras de su nombre sea par
+func studentsNamePar(estudiantes: [String]) -> [String] {
+    var studentsPar: [String] = []
+    
+    for student in estudiantes {
+        if (student.count % 2 == 0) {
+            studentsPar.append(student)
+        }
+    }
+    
+    return studentsPar
+}
+
+studentsNamePar(estudiantes: students)
+
 // 8.2.- Crear una función que me devuelva el número de estudiantes que su nombre contenga más de 5 letras
+func studentsName5Count(estudiantes: [String]) -> Int {
+    return studentsName5(estudiantes).count
+}
+
+studentsName5Count(estudiantes: students)
+
+
 // 8.3.- Crear una función que me devuelva el número de estudiantes que el número de letras de su nombre sea par
+func studentsNameParCount(estudiantes: [String]) -> Int {
+    return studentsNamePar(estudiantes: estudiantes).count
+}
+
+studentsNameParCount(estudiantes: students)
+
+
+// 8.4.- Crear una función que escriba en consola "Hello \(studentName)" por cada estudiante
+func printStudentHello(student: String) {
+    print("Hello \(student)")
+}
+
+func printStudentsHello(estudiantes: [String]) {
+    for student in estudiantes {
+        printStudentHello(student: student)
+    }
+}
+
+printStudentsHello(estudiantes: students)
+
+// 8.5.- Crear una función que escriba en consola "Hello \(studentName)" por cada estudiante que su nombre contenga una 'a'
+func printStudentsA(estudiantes: [String]) {
+    for student in estudiantes {
+        if(student.contains("a")) {
+            printStudentHello(student: student)
+        }
+    }
+}
+
+printStudentsA(estudiantes: students)
+
+
