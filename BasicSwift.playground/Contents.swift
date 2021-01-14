@@ -644,3 +644,35 @@ func printStudentsA(estudiantes: [String]) {
 printStudentsA(estudiantes: students)
 
 
+// ************* Closures *************
+/* for student in students {
+    print("Value \(student)")
+ }
+ */
+students.forEach { student in
+    print("Value \(student)")
+}
+
+// $0 es el parámetro de entrada del Closure, sería igual que 'student' en cada iteración
+students.forEach { print("Value \($0)") }
+
+// for (index, student) in students.enumerated() { }
+students.enumerated().forEach { index, student in
+    print("Index \(index), Value \(student)")
+}
+
+// $0 y $1 son los parámetros de entrada del Closure, serían igual que 'index' y 'student' en cada iteración
+students.enumerated().forEach { print("Index \($0), Value \($1)") }
+
+/*
+ for student in estudiantes {
+     if(student.contains("a")) {
+         printStudentHello(student: student)
+     }
+ }
+ */
+students.filter { student -> Bool in
+    return student.contains("a")
+}
+
+var studentsFiltered = students.filter { $0.contains("a") }
