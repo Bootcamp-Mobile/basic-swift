@@ -549,7 +549,7 @@ printHelloStudent(name: "Adrián")
 // Añadimos etiquetas a los parámetros 'email' y 'password'
 func login(email user: String, password pass: String) -> Bool {
     print("Login \(user) password \(pass)")
-    
+        
     if(user.isEmpty || pass.isEmpty) {
         return false
     } else {
@@ -575,18 +575,19 @@ print("El resultado del incremento es \(resultIncrement)")
 print("****** 8 ******")
 // 8.- Crear una función que me devuelva los estudiantes con más de 5 letras
 func studentsName5(_ estudiantes: [String]) -> [String] {
-    var studentsResult: [String] = []
+    var estudiantesResult: [String] = []
     
     for student in estudiantes {
         if(student.count > 5) {
-            studentsResult.append(student)
+            estudiantesResult.append(student)
         }
     }
     
-    return studentsResult
+    return estudiantesResult
 }
 
-let studentsResult = studentsName5(students)
+// Llamamos a la función studentsName5 y le pasamos el listado de estudiantes 'students'
+let studentsResult = studentsName5(students) // -> [String]
 
 // 8.1.- Crear una función que me devuelva los estudiantes que el número de letras de su nombre sea par
 func studentsNamePar(estudiantes: [String]) -> [String] {
@@ -601,32 +602,37 @@ func studentsNamePar(estudiantes: [String]) -> [String] {
     return studentsPar
 }
 
+// Llamamos a la función studentsNamePar y le pasamos el listado de estudiantes 'students'
 studentsNamePar(estudiantes: students)
 
 // 8.2.- Crear una función que me devuelva el número de estudiantes que su nombre contenga más de 5 letras
 func studentsName5Count(estudiantes: [String]) -> Int {
-    return studentsName5(estudiantes).count
+    // let estudiantesResult = ["Elena", "Sergi", "Miguel"]
+    let estudiantesResult = studentsName5(estudiantes) // -> [String]
+    return estudiantesResult.count
 }
 
+// Llamamos a la función studentsName5Count y le pasamos el listado de estudiantes 'students'
 studentsName5Count(estudiantes: students)
 
 
 // 8.3.- Crear una función que me devuelva el número de estudiantes que el número de letras de su nombre sea par
-func studentsNameParCount(estudiantes: [String]) -> Int {
-    return studentsNamePar(estudiantes: estudiantes).count
+func studentsNameParCount(estudiantes studentList: [String]) -> Int {
+    // return ["Elena", "Sergi", "Miguel"].count
+    return studentsNamePar(estudiantes: studentList).count
 }
 
 studentsNameParCount(estudiantes: students)
 
 
 // 8.4.- Crear una función que escriba en consola "Hello \(studentName)" por cada estudiante
-func printStudentHello(student: String) {
+func printStudentHello(_ student: String) {
     print("Hello \(student)")
 }
 
 func printStudentsHello(estudiantes: [String]) {
     for student in estudiantes {
-        printStudentHello(student: student)
+        printStudentHello(student)
     }
 }
 
@@ -636,22 +642,105 @@ printStudentsHello(estudiantes: students)
 func printStudentsA(estudiantes: [String]) {
     for student in estudiantes {
         if(student.contains("a")) {
-            printStudentHello(student: student)
+            printStudentHello(student)
         }
     }
+    
+    /*
+     for student in estudiantes where student.contains("a") {
+         printStudentHello(student)
+     }
+     */
 }
 
 printStudentsA(estudiantes: students)
 
 
 // ************* Closures *************
-/* for student in students {
+print("****** Closures ******")
+
+/*
+ { parámetroEntrada, parámetroEntrada2 in
+    code
+ }
+ 
+ for student in students {
     print("Value \(student)")
  }
  */
-students.forEach { student in
-    print("Value \(student)")
+// Declaramos un Closure '(String) -> Void' con parámetro de entrada de tipo String
+// y que devuelve vacío, nada
+// 'parametroEntrada' será de tipo String como hemos definido en el Closure
+let closureForEachPrint: (String) -> Void = { parametroEntrada in
+    print("Value \(parametroEntrada)")
 }
+
+let closureForEachPar: (String) -> Bool = { parametroEntrada in
+    return (parametroEntrada.count % 2 == 0)
+}
+
+func forEachStudents(_ students: [String],
+                     _ closureCondition: (String) -> Bool,
+                     _ closurePrint: (String) -> Void) {
+    for student in students {
+        // Llamamos al closure 'closureStudent' que nos llega como
+        // parámetro a la función 'forEachStudents'
+        if(closureCondition(student)) {
+            closurePrint(student)
+        }
+    }
+}
+
+// Llamamos a la función 'forEachStudents' y le pasamos la lista de estudiantes 'students'
+// y un closure de tipo (String) -> Void
+// Podríamos utilizar la constante ya definida 'closureForEach'
+// forEachStudents(students, { student in
+//     print("Value \(student)")
+// })
+forEachStudents(students, closureForEachPar, closureForEachPrint)
+
+// Como en la función 'forEachStudents' el último parámetro de entrada 'closureStudent'
+// es el closure, lo podemos sacar fuera de los parántesis
+forEachStudents(students,
+                { parametroEntrada in
+                    return (parametroEntrada.count % 2 == 0)
+                },
+                { student in
+                    print("El nombre del estudiante es par: \(student)")
+                })
+
+forEachStudents(students,
+                { parametroEntrada in
+                    return (parametroEntrada.count > 5)
+                },
+                { student in
+                    print("El nombre del estudiante tiene más de 5 letras: \(student)")
+                })
+
+/*
+ -> func forEachStudents
+ students = ["Elena", "Adrián", "Natalia", "Sergi", "Belén", "Miguel", "Alex"]
+ 
+ -> Index = 0, value = "Elena"
+    -> Closure closureForEach
+        parametroEntrada = "Elena"
+        print("Value \("Elena")")
+ 
+ -> Index = 1, value = "Adrián"
+     -> Closure closureForEach
+         parametroEntrada = "Adrián"
+         print("Value \("Adrián")")
+ .
+ .
+ .
+ -> Index = 6, value = "Alex"
+     -> Closure closureForEach
+         parametroEntrada = "Alex"
+         print("Value \("Alex")")
+ 
+ */
+
+students.forEach(closureForEachPrint)
 
 // $0 es el parámetro de entrada del Closure, sería igual que 'student' en cada iteración
 students.forEach { print("Value \($0)") }
