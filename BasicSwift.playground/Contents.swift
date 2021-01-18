@@ -382,12 +382,12 @@ for number in (1...100).reversed() {
 //    print(number)
 //}
 
-var index = 0
 // 0 < 7 -> true
 // 1 < 7 -> true
 // .
-// .
+// 6 < 7 -> true
 // 7 < 7 -> false
+var index = 0
 while (index < students.count) {
     print(students[index])
     index += 1 // index = index + 1
@@ -743,7 +743,14 @@ forEachStudents(students,
 students.forEach(closureForEachPrint)
 
 // $0 es el parámetro de entrada del Closure, sería igual que 'student' en cada iteración
-students.forEach { print("Value \($0)") }
+/*
+ for student in students {
+    print("Value \(student)")
+ }
+ */
+students.forEach { student in
+    print("Value \(student)")
+}
 
 // for (index, student) in students.enumerated() { }
 students.enumerated().forEach { index, student in
@@ -754,9 +761,10 @@ students.enumerated().forEach { index, student in
 students.enumerated().forEach { print("Index \($0), Value \($1)") }
 
 /*
+ var studentsFilterd: [String] = []
  for student in estudiantes {
      if(student.contains("a")) {
-         printStudentHello(student: student)
+        studentsFilterd.append(student)
      }
  }
  */
@@ -765,3 +773,46 @@ students.filter { student -> Bool in
 }
 
 var studentsFiltered = students.filter { $0.contains("a") }
+
+
+/*
+ APP ----------------------- --------- ----------
+                    (login) |         | (isUserLogged)
+LOGIN                       -----------
+ 
+ */
+let callbackLogin: (Bool) -> Void = { isLogged in
+    print("El resultado del login del usuario es: \(isLogged)")
+}
+
+func login(user: String, password: String, completion: (Bool) -> Void) {
+    // Aquí iría el código que hace el Login llamando a un servicio del backend....
+    // En algún momento responde con un true o false
+    // En ese momento, invocamos el closure y le envíamos el resultado del login, por ejemplo true
+    completion(true)
+}
+/*
+login(user: "David",
+      password: "123456",
+      completion: { isLogged in
+        print("El resultado del login del usuario es: \(isLogged)")
+      })
+ */
+login(user: "David",
+      password: "123456",
+      completion: callbackLogin)
+
+// ************* TypeAlias *************
+print("****** TypeAlias ******")
+
+typealias CallbackLogin = (Bool) -> Void
+let completionLogin: CallbackLogin = { isLogged in
+    print("El resultado del login del usuario es: \(isLogged)")
+}
+
+typealias Age = Int
+var ageUser: Age = 18
+
+typealias LoginData = (user: String, password: String)
+var loginData: LoginData = ("David", "123456")
+func userLogin(data: LoginData) {}
