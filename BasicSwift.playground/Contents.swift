@@ -925,3 +925,14 @@ let bootcampStudents = [Student(name: "Elena",
 
 print("****** 9.1 ******")
 // Escribir en consola los nombres de los estudiantes con menos de 30 años
+for student in bootcampStudents {
+    if let age = student.age, age < 30 {
+        print(student.fullName())
+    }
+}
+
+bootcampStudents.forEach { student in
+    if let age = student.age, age < 30 {
+        print(student.fullName())
+    }
+}
