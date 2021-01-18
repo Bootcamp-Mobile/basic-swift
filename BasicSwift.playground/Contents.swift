@@ -894,3 +894,34 @@ studentList[0].fullName()
 
 print("****** 9 ******")
 // Crear una lista con los datos de los estudiantes del Bootcamp
+let bootcampStudents = [Student(name: "Elena",
+                                lastname: "Barbullushi",
+                                email: "e.barbullushi@email.com",
+                                age: 25),
+                        Student(name: "Sergi",
+                                lastname: "Exposito",
+                                email: "s.exposito@email.com",
+                                age: 45),
+                        Student(name: "Belén",
+                                lastname: "Cerezo",
+                                email: "b.cerezo@email.com",
+                                age: 23),
+                        Student(name: "Miguel",
+                                lastname: "Alarcón",
+                                email: "m.alarcon@email.com",
+                                age: 37),
+                        Student(name: "Natalia",
+                                lastname: "Soria",
+                                email: "n.soria@email.com",
+                                age: 19),
+                        Student(name: "Adrián",
+                                lastname: "Puerto",
+                                email: "a.puerto@email.com",
+                                age: 32),
+                        Student(name: "Alex",
+                                lastname: "Del Río",
+                                email: "a.rio@email.com",
+                                age: 29)]
+
+print("****** 9.1 ******")
+// Escribir en consola los nombres de los estudiantes con menos de 30 años
