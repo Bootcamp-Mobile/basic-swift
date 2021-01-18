@@ -816,3 +816,81 @@ var ageUser: Age = 18
 typealias LoginData = (user: String, password: String)
 var loginData: LoginData = ("David", "123456")
 func userLogin(data: LoginData) {}
+
+
+// ************* Classes *************
+print("****** Classes ******")
+
+// Declaración clase Student
+class Student {
+    // Propiedades de la clase Student
+    var name: String
+    var lastname: String
+    var age: Int?
+    var address: String?
+    var email: String
+    var phone: String?
+
+    // Constructor o inicializador de la clase Student
+    init(name: String = "", lastname: String = "", email: String = "", age: Int? = nil, address: String = "", phone: String = "") {
+        self.name = name
+        self.lastname = lastname
+        self.email = email
+        self.age = age
+        self.address = address
+        self.phone = phone
+    }
+
+    // Métodos de la clase Student
+    func fullName() -> String {
+        return "\(name) \(lastname)"
+    }
+}
+
+// Creamos una instancia/objeto de la clase Student con el init que hemos definido
+var student = Student(name: "Miguel",
+                      lastname: "Alarcón",
+                      email: "m.alarcon@email.com",
+                      age: 54)
+
+var student2 = Student(name: "Natalia",
+                       lastname: "Soria",
+                       email: "n.soria@email.com")
+
+print("El primer alumno es \(student.fullName())")
+print("El segundo alumno es \(student2.fullName())")
+
+student2.name = "Sergi"
+student2.lastname = "Exposito"
+print("El segundo alumno es \(student2.fullName())")
+
+
+// Ejemplo var/let punteros a un espacio de memoria
+student2 = student
+/*
+  student, student2 = (name: "Miguel",
+                       lastname: "Alarcón",
+                       email: "m.alarcon@email.com")
+ */
+
+student.name = "Luis"
+student2.lastname = "Cerezo"
+/*
+  student, student2 = (name: "Luis",
+                       lastname: "Cerezo",
+                       email: "m.alarcon@email.com")
+ */
+
+print("El segundo alumno es \(student2.fullName())")
+// El segundo alumno es Luis Cerezo
+
+
+var studentList: [Student] = []
+studentList.append(contentsOf: [student,
+                                student2,
+                                Student(name: "", lastname: "", email: "")])
+studentList[0].fullName()
+
+
+print("****** 9 ******")
+// Crear una lista con los datos de los estudiantes del Bootcamp
