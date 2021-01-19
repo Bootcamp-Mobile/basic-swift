@@ -1090,5 +1090,82 @@ let bootcamps = [Bootcamp(name: "Bootcamp Mobile",
                           students: bootcampStudents.filter { $0.name.contains("i") })]
 
 print("****** 10 ******")
-// Escribir en consola por cada bootcamp
-// Nombre de estudiantes
+// Escribir en consola, por cada bootcamp,
+// el nombre de cada estudiante del bootcamp
+for bootcamp in bootcamps {
+    print("\(bootcamp.name), \(bootcamp.studentsCount) estudiantes:")
+    for student in bootcamp.students {
+        print(student.name)
+    }
+    print()
+}
+
+print("****** 10.1 ******")
+// Escribir en consola, por cada bootcamp,
+// el nombre de cada profesor del bootcamp
+for bootcamp in bootcamps {
+    print("\(bootcamp.name), \(bootcamp.teachersCount) profesores:")
+    for teacher in bootcamp.teachers {
+        print(teacher.name)
+    }
+    print()
+}
+
+print("****** 10.2 ******")
+// Escribir en consola el nombre de los bootcamps que tengan más de 2 estudiantes
+
+
+print("****** 10.3 ******")
+// Escribir en consola el nombre de los bootcamps que tengan más de 1 profesor
+
+
+print("****** 10.4 ******")
+// Escribir en consola el nombre de todos los estudiantes de los bootcamps sin repetir nombres
+
+
+print("****** 10.5 ******")
+// Escribir en consola el nombre de todos los profesores de los bootcamps sin repetir nombres
+
+
+print("****** 10.6 ******")
+// Escribir en consola el nombre de todos los alumnos de los bootcamps sin repetir nombres ordenados alfabeticamente
+
+
+print("****** 10.7 ******")
+// Escribir en consola el nombre de todos los profesores de los bootcamps sin repetir nombres ordenados alfabeticamente
+
+
+
+print("****** 10.8 ******")
+// Escribir en consola el nombre de los estudiantes que están en más de un bootcamp
+/* Ejemplo
+ Alumno Belén 2 bootcamps
+ Alumno Miguel 1 bootcamps
+ */
+
+
+print("****** 10.9 ******")
+// Escribir en consola el nombre de los profesores que están en más de un bootcamp
+/* Ejemplo
+ Profesor David 2 bootcamps
+ Profesor Sara 1 bootcamps
+ */
+
+
+print("****** 10.10 ******")
+// Escribir en consola el nombre de cada estudiante y los de sus profesores
+/* Ejemplo
+ Alumno Belén, 2 profesores:
+ David
+ Sara
+ */
+
+
+print("****** 10.11 ******")
+// Escribir en consola el nombre de cada profesor y los de sus alumnos
+/* Ejemplo
+ Profesor David, 3 alumnos:
+ Belén
+ Miguel
+ Alex
+ */
