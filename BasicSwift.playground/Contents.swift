@@ -830,6 +830,11 @@ class Student {
     var address: String?
     var email: String
     var phone: String?
+    
+    // Computed property
+    var fullName: String {
+        return "\(name) \(lastname)"
+    }
 
     // Constructor o inicializador de la clase Student
     init(name: String = "", lastname: String = "", email: String = "", age: Int? = nil, address: String = "", phone: String = "") {
@@ -842,9 +847,9 @@ class Student {
     }
 
     // Métodos de la clase Student
-    func fullName() -> String {
-        return "\(name) \(lastname)"
-    }
+//    func fullName() -> String {
+//        return "\(name) \(lastname)"
+//    }
 }
 
 // Creamos una instancia/objeto de la clase Student con el init que hemos definido
@@ -857,12 +862,12 @@ var student2 = Student(name: "Natalia",
                        lastname: "Soria",
                        email: "n.soria@email.com")
 
-print("El primer alumno es \(student.fullName())")
-print("El segundo alumno es \(student2.fullName())")
+print("El primer alumno es \(student.fullName)")
+print("El segundo alumno es \(student2.fullName)")
 
 student2.name = "Sergi"
 student2.lastname = "Exposito"
-print("El segundo alumno es \(student2.fullName())")
+print("El segundo alumno es \(student2.fullName)")
 
 
 // Ejemplo var/let punteros a un espacio de memoria
@@ -881,7 +886,7 @@ student2.lastname = "Cerezo"
                        email: "m.alarcon@email.com")
  */
 
-print("El segundo alumno es \(student2.fullName())")
+print("El segundo alumno es \(student2.fullName)")
 // El segundo alumno es Luis Cerezo
 
 
@@ -889,7 +894,7 @@ var studentList: [Student] = []
 studentList.append(contentsOf: [student,
                                 student2,
                                 Student(name: "", lastname: "", email: "")])
-studentList[0].fullName()
+studentList[0].fullName
 
 
 print("****** 9 ******")
@@ -931,7 +936,7 @@ for student in bootcampStudents {
     // Desempaquetar de forma segura 'student.age' que es opcional 'Int?',
     // después comprobamos si 'age' es menor que 30
     if let age = student.age, age < 30 {
-        print("\(student.fullName()) age \(age)")
+        print("\(student.fullName) age \(age)")
     }
     
     /*
@@ -950,7 +955,7 @@ for student in bootcampStudents {
 // Mismo ejemplo utilizando el closure 'forEach'
 bootcampStudents.forEach { student in
     if let age = student.age, age < 30 {
-        print(student.fullName())
+        print(student.fullName)
     }
 }
 
@@ -959,7 +964,7 @@ print("****** 9.2 ******")
 // y su email tenga más de 15 letras
 bootcampStudents.forEach { student in
     if let age = student.age, age < 30, student.email.count > 15 {
-        print("\(student.fullName()) age \(age) email \(student.email)")
+        print("\(student.fullName) age \(age) email \(student.email)")
     }
 }
 
@@ -969,16 +974,33 @@ print("****** 9.3 ******")
 // y que tengan número de teléfono
 bootcampStudents.forEach { student in
     if let phone = student.phone, let age = student.age, age < 30, !phone.isEmpty {
-        print("\(student.fullName()) age \(age) phone \(phone)")
+        print("\(student.fullName) age \(age) phone \(phone)")
     }
 }
 
 
-class Teacher {
+class Teacher: CustomStringConvertible {
     var name: String
     var lastname: String
     var email: String
     var age: Int?
+    
+    // Computed properties
+    // Variable 'description' se utiliza porque obliga el protocolo 'CustomStringConvertible'
+    var description: String {
+        return """
+        "teacher": {
+            "name": \(name),
+            "lastname": \(lastname),
+            "email": \(email),
+            "age": \(age ?? -1)
+        }
+        """
+    }
+    
+    var fullName: String {
+        return "\(name) \(lastname)"
+    }
     
     init(name: String = "", lastname: String = "", email: String = "", age: Int? = nil) {
         self.name = name
@@ -988,6 +1010,21 @@ class Teacher {
     }
 }
 
+var teacherDavid = Teacher(name: "David",
+                           lastname: "Jardón",
+                           email: "d.jardon@email.com",
+                           age: 35)
+var teacherCarlos = Teacher(name: "Carlos",
+                            lastname: "De Tena",
+                            email: "c.detena@email.com",
+                            age: 34)
+
+teacherDavid.fullName
+teacherCarlos.fullName
+
+print(teacherDavid)
+print(teacherCarlos)
+
 typealias Teachers = [Teacher]
 typealias Students = [Student]
 
@@ -995,6 +1032,17 @@ class Bootcamp {
     var name: String
     var teachers: Teachers
     var students: Students
+    
+    // Computed properties
+    // 1.- teachersCount
+    var teachersCount: Int {
+        return teachers.count
+    }
+    
+    // 2.- studentsCount
+    var studentsCount: Int {
+        return students.count
+    }
     
     init(name: String, teachers: Teachers = [], students: Students = []) {
         self.name = name
@@ -1017,5 +1065,30 @@ let bootcampTeachers = [Teacher(name: "David",
                                 age: 36),
                         Teacher(name: "Andrés",
                                 lastname: "López",
-                                email: "a.lopez@email.com",
-                                age: nil)]
+                                email: "a.lopez@email.com")]
+
+print(bootcampTeachers)
+
+
+
+var bootcampMobile = Bootcamp(name: "Bootcamp Mobile",
+                              teachers: bootcampTeachers,
+                              students: bootcampStudents)
+
+bootcampMobile.name
+bootcampMobile.studentsCount
+bootcampMobile.teachersCount
+
+let bootcamps = [Bootcamp(name: "Bootcamp Mobile",
+                          teachers: bootcampTeachers.filter { $0.name.contains("a") },
+                          students: bootcampStudents.filter { $0.name.contains("e") }),
+                 Bootcamp(name: "Bootcamp Fullstack",
+                          teachers: bootcampTeachers.filter { $0.name.contains("i") },
+                          students: bootcampStudents.filter { $0.name.contains("a") }),
+                 Bootcamp(name: "Bootcamp UX/UI",
+                          teachers: bootcampTeachers.filter { $0.name.contains("o") },
+                          students: bootcampStudents.filter { $0.name.contains("i") })]
+
+print("****** 10 ******")
+// Escribir en consola por cada bootcamp
+// Nombre de estudiantes
