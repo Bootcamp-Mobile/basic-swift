@@ -1111,6 +1111,7 @@ for bootcamp in bootcamps {
     print()
 }
 
+
 print("****** 10.2 ******")
 // Escribir en consola el nombre de los bootcamps que tengan más de 2 estudiantes
 
@@ -1135,20 +1136,19 @@ print("****** 10.7 ******")
 // Escribir en consola el nombre de todos los profesores de los bootcamps sin repetir nombres ordenados alfabeticamente
 
 
-
 print("****** 10.8 ******")
 // Escribir en consola el nombre de los estudiantes que están en más de un bootcamp
 /* Ejemplo
- Alumno Belén 2 bootcamps
- Alumno Miguel 1 bootcamps
+ Alumno Belén 3 bootcamps
+ Alumno Miguel 2 bootcamps
  */
 
 
 print("****** 10.9 ******")
 // Escribir en consola el nombre de los profesores que están en más de un bootcamp
 /* Ejemplo
- Profesor David 2 bootcamps
- Profesor Sara 1 bootcamps
+ Profesor David 3 bootcamps
+ Profesor Sara 2 bootcamps
  */
 
 
