@@ -901,7 +901,8 @@ let bootcampStudents = [Student(name: "Elena",
                         Student(name: "Sergi",
                                 lastname: "Exposito",
                                 email: "s.exposito@email.com",
-                                age: 45),
+                                age: 45,
+                                phone: "612692692"),
                         Student(name: "Belén",
                                 lastname: "Cerezo",
                                 email: "b.cerezo@email.com",
@@ -913,7 +914,8 @@ let bootcampStudents = [Student(name: "Elena",
                         Student(name: "Natalia",
                                 lastname: "Soria",
                                 email: "n.soria@email.com",
-                                age: 19),
+                                age: 19,
+                                phone: "666612612"),
                         Student(name: "Adrián",
                                 lastname: "Puerto",
                                 email: "a.puerto@email.com",
@@ -926,13 +928,94 @@ let bootcampStudents = [Student(name: "Elena",
 print("****** 9.1 ******")
 // Escribir en consola los nombres de los estudiantes con menos de 30 años
 for student in bootcampStudents {
+    // Desempaquetar de forma segura 'student.age' que es opcional 'Int?',
+    // después comprobamos si 'age' es menor que 30
     if let age = student.age, age < 30 {
-        print(student.fullName())
+        print("\(student.fullName()) age \(age)")
     }
+    
+    /*
+    // Podríamos utilizar un guard-let en lugar del if-let anterior
+    guard let age = student.age,
+          age < 30 else {
+        // Si NO se cumplen las condiciones salto
+        // a la siguiente iteración con 'continue'
+        continue
+    }
+    
+    print("\(student.fullName()) age \(age)")
+    */
 }
 
+// Mismo ejemplo utilizando el closure 'forEach'
 bootcampStudents.forEach { student in
     if let age = student.age, age < 30 {
         print(student.fullName())
     }
 }
+
+print("****** 9.2 ******")
+// Escribir en consola los nombres de los estudiantes con menos de 30 años
+// y su email tenga más de 15 letras
+bootcampStudents.forEach { student in
+    if let age = student.age, age < 30, student.email.count > 15 {
+        print("\(student.fullName()) age \(age) email \(student.email)")
+    }
+}
+
+
+print("****** 9.3 ******")
+// Escribir en consola los nombres de los estudiantes con más de 30 años
+// y que tengan número de teléfono
+bootcampStudents.forEach { student in
+    if let phone = student.phone, let age = student.age, age < 30, !phone.isEmpty {
+        print("\(student.fullName()) age \(age) phone \(phone)")
+    }
+}
+
+
+class Teacher {
+    var name: String
+    var lastname: String
+    var email: String
+    var age: Int?
+    
+    init(name: String = "", lastname: String = "", email: String = "", age: Int? = nil) {
+        self.name = name
+        self.lastname = lastname
+        self.email = email
+        self.age = age
+    }
+}
+
+typealias Teachers = [Teacher]
+typealias Students = [Student]
+
+class Bootcamp {
+    var name: String
+    var teachers: Teachers
+    var students: Students
+    
+    init(name: String, teachers: Teachers = [], students: Students = []) {
+        self.name = name
+        self.teachers = teachers
+        self.students = students
+    }
+}
+
+let bootcampTeachers = [Teacher(name: "David",
+                                lastname: "Jardón",
+                                email: "d.jardon@email.com",
+                                age: 35),
+                        Teacher(name: "Carlos",
+                                lastname: "De Tena",
+                                email: "c.detena@email.com",
+                                age: 34),
+                        Teacher(name: "Sara",
+                                lastname: "Vizarro",
+                                email: "s.vizarro@email.com",
+                                age: 36),
+                        Teacher(name: "Andrés",
+                                lastname: "López",
+                                email: "a.lopez@email.com",
+                                age: nil)]
