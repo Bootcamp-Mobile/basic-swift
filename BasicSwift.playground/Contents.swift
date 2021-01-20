@@ -1323,6 +1323,11 @@ print("****** 10.9 ******")
  Profesor David 3 bootcamps
  Profesor Sara 2 bootcamps
  */
+let teachersMore1Bootcamp: [(name: String, count: Int)] = bootcampTeachers.compactMap { teacher in
+    let teacherBootcamps = bootcamps.filter { $0.teachers.contains { $0.name.compare(teacher.name) == .orderedSame } }
+    return teacherBootcamps.count > 1 ? (teacher.name, teacherBootcamps.count) : nil
+}
+teachersMore1Bootcamp.forEach { print("Profesor \($0.name) \($0.count) bootcamps") }
 
 
 print()
@@ -1346,9 +1351,93 @@ print("****** 10.11 ******")
  */
 
 
-
 print()
 print("****** 10.12 ******")
-//print(studentNamesSorted.sorted(by: { (name1, name2) -> Bool in
-//    return name1.compare(name2) == .orderedAscending
-//}))
+// Escribir en consola el nombre de cada alumno ordenados por la edad del alumno
+/* Ejemplo
+ Alumno Sergi, edad 35
+ Alumno Belén, edad 20
+ ....
+ */
+
+print()
+print("****** 10.13 ******")
+// Escribir en consola el nombre de cada profesor ordenados por la edad del profesor
+/* Ejemplo
+ Profesor David, edad 35
+ Profesor Carlos, edad 20
+ ....
+ */
+
+print()
+print("****** 10.14 ******")
+// Escribir en consola el nombre del alumno con mayor edad de cada bootcamp
+/* Ejemplo
+ Bootcamp Mobile, alumno Sergi, edad 35
+ Bootcamp Fullstack, alumno Elena, edad 27
+ ....
+ */
+
+print()
+print("****** 10.15 ******")
+// Escribir en consola el nombre del alumno con menor edad de cada bootcamp
+/* Ejemplo
+ Bootcamp Mobile, alumno Sergi, edad 18
+ Bootcamp Fullstack, alumno Elena, edad 21
+ ....
+ */
+
+print()
+print("****** 10.16 ******")
+// Escribir en consola el nombre de los profesores de cada bootcamp que sean mayores
+// que todos sus alumnos
+/* Ejemplo
+ Bootcamp Mobile, profesor David, edad 35
+ ....
+ */
+
+print()
+print("****** 10.17 ******")
+// Escribir en consola el nombre de los profesores de cada bootcamp que sean menores
+// que todos sus alumnos
+/* Ejemplo
+ Bootcamp Mobile, profesor David, edad 20
+ ....
+ */
+
+
+print()
+print("****** 10.18 ******")
+// Escribir en consola el nombre de cada alumno, el número de sus bootcamps y el nombre de cada bootcamp
+/* Ejemplo
+ Alumno Alex, 2 bootcamps
+ Bootcamps:
+ Mobile
+ Fullstack
+ ....
+ */
+
+
+print()
+print("****** 10.19 ******")
+// Escribir en consola el nombre de cada profesor, el número de sus bootcamps y el nombre de cada bootcamp
+/* Ejemplo
+ Profesor David, 2 bootcamps
+ Bootcamps:
+ Mobile
+ Fullstack
+ ....
+ */
+
+
+print()
+print("****** 10.20 ******")
+// Escribir en consola el nombre de cada alumno, el número de sus bootcamps, el nombre de cada bootcamp,
+// y el nombre del profesor de cada bootmcap
+/* Ejemplo
+ Alumno Adrián, 2 bootcamps
+ Bootcamps:
+ Mobile, profesor David
+ Fullstack, profesor Carlos
+ ....
+ */
