@@ -664,6 +664,10 @@ print("****** Closures ******")
     code
  }
  
+ { parametroEntrada -> Int in
+     return 0
+ }
+ 
  for student in students {
     print("Value \(student)")
  }
@@ -671,7 +675,8 @@ print("****** Closures ******")
 // Declaramos un Closure '(String) -> Void' con parámetro de entrada de tipo String
 // y que devuelve vacío, nada
 // 'parametroEntrada' será de tipo String como hemos definido en el Closure
-let closureForEachPrint: (String) -> Void = { parametroEntrada in
+typealias ClosureForEach = (String) -> Void
+let closureForEachPrint: ClosureForEach = { parametroEntrada in
     print("Value \(parametroEntrada)")
 }
 
@@ -1035,14 +1040,25 @@ class Bootcamp {
     
     // Computed properties
     // 1.- teachersCount
+    /*
+     func teachersCount() -> Int {
+         return teachers.count
+     }
+     */
     var teachersCount: Int {
         return teachers.count
     }
     
     // 2.- studentsCount
+    /*
+     func studentsCount() -> Int {
+         return students.count
+     }
+     */
     var studentsCount: Int {
         return students.count
     }
+    
     
     init(name: String, teachers: Teachers = [], students: Students = []) {
         self.name = name
@@ -1100,6 +1116,7 @@ for bootcamp in bootcamps {
     print()
 }
 
+print()
 print("****** 10.1 ******")
 // Escribir en consola, por cada bootcamp,
 // el nombre de cada profesor del bootcamp
@@ -1112,38 +1129,194 @@ for bootcamp in bootcamps {
 }
 
 
+print()
 print("****** 10.2 ******")
 // Escribir en consola el nombre de los bootcamps que tengan más de 2 estudiantes
+/*
+ for bootcamp in bootcamps {
+    if(bootcamp.students.count > 2) {
+        print(bootcamp.name)
+    }
+ }
+ 
+ bootcamps.forEach { bootcamp in
+     if(bootcamp.students.count > 2) {
+         print(bootcamp.name)
+     }
+ }
+ */
+for bootcamp in bootcamps where bootcamp.students.count > 2 {
+    print(bootcamp.name)
+}
 
 
+print()
 print("****** 10.3 ******")
 // Escribir en consola el nombre de los bootcamps que tengan más de 1 profesor
+/*
+ for bootcamp in bootcamps {
+    if(bootcamp.teachers.count > 1) {
+        print(bootcamp.name)
+    }
+ }
+ 
+ bootcamps.forEach { bootcamp in
+     if(bootcamp.teachers.count > 1) {
+         print(bootcamp.name)
+     }
+ }
+ */
+for bootcamp in bootcamps where bootcamp.teachers.count > 1 {
+    print(bootcamp.name)
+}
 
 
+print()
 print("****** 10.4 ******")
 // Escribir en consola el nombre de todos los estudiantes de los bootcamps sin repetir nombres
+var studentNames: Set<String> = []
+for bootcamp in bootcamps {
+    for student in bootcamp.students {
+        studentNames.insert(student.name)
+    }
+}
+print(studentNames)
 
 
+print()
 print("****** 10.5 ******")
 // Escribir en consola el nombre de todos los profesores de los bootcamps sin repetir nombres
+var teacherNames: Set<String> = []
+for bootcamp in bootcamps {
+    for teacher in bootcamp.teachers {
+        teacherNames.insert(teacher.name)
+    }
+}
+print(teacherNames)
 
 
+print()
 print("****** 10.6 ******")
 // Escribir en consola el nombre de todos los alumnos de los bootcamps sin repetir nombres ordenados alfabeticamente
+var studentNamesSorted: Set<String> = []
+for bootcamp in bootcamps {
+    for student in bootcamp.students {
+        studentNamesSorted.insert(student.name)
+    }
+}
+// print(studentNamesSorted.sorted())
+print(studentNamesSorted.sorted(by: { (name1, name2) -> Bool in
+    return name1.compare(name2) == .orderedAscending
+}))
 
 
+print()
 print("****** 10.7 ******")
 // Escribir en consola el nombre de todos los profesores de los bootcamps sin repetir nombres ordenados alfabeticamente
+var teacherNamesSorted: Set<String> = []
+for bootcamp in bootcamps {
+    for teacher in bootcamp.teachers {
+        teacherNamesSorted.insert(teacher.name)
+    }
+}
+print(teacherNamesSorted.sorted())
 
 
+print()
 print("****** 10.8 ******")
 // Escribir en consola el nombre de los estudiantes que están en más de un bootcamp
 /* Ejemplo
  Alumno Belén 3 bootcamps
  Alumno Miguel 2 bootcamps
  */
+var studentBootcamps: [String:Int] = [:]
+bootcamps.forEach { bootcamp in
+    bootcamp.students.forEach { student in
+        studentBootcamps[student.name] = (studentBootcamps[student.name] ?? 0) + 1
+    }
+}
+
+for (name, bootcamps) in studentBootcamps where bootcamps > 1 {
+    print("Alumno \(name) \(bootcamps) bootcamps")
+}
+
+/* Ejemplo compactMap
+ let studentsMore1Bootcamp: [String] = bootcampStudents.compactMap { ($0.name.count > 5) ? $0.name : nil }
+
+ let studentsMore1Bootcamp: [String] = bootcampStudents.compactMap { student in
+    if(student.name.count > 5) {
+        return student.name
+    } else {
+        return nil
+    }
+ }
+
+// Operador ternario es una simplificación de un if: (condición) ? valorDevuelto_SiCondiciónTrue : valorDevuelto_SiCondiciónFalse
+
+let studentsMore1Bootcamp: [String] = bootcampStudents.compactMap { student in
+    let studentName: String? = (student.name.count > 5) ? student.name : nil
+    return studentName
+}
+ */
 
 
+/* Ejemplo filter
+let bootcamps5: [Bootcamp] = bootcamps.filter { $0.name.count > 5}
+let bootcamps5: [Bootcamp] = bootcamps.filter { bootcamp in
+    return bootcamp.name.count > 5
+}
+*/
+
+/* Ejemplo contains
+var studentToSearch = "Elena"
+let existsStudent: Bool = bootcampStudents.contains { $0.name.compare(studentToSearch) == .orderedSame }
+    
+let existsStudent: Bool = bootcampStudents.contains { student -> Bool in
+    return student.name.compare(studentToSearch) == .orderedSame
+}
+*/
+
+
+/*
+ let studentsMore1Bootcamp: [String] = bootcampStudents.compactMap { student in
+     return (bootcamps.filter { $0.students.contains { $0.name.compare(student.name) == .orderedSame } }.count > 1 ? student.name : nil)
+ }
+ print(studentsMore1Bootcamp)
+ */
+
+/*
+ bootcampStudents.forEach { student in
+     let studentBootcamps = bootcamps.filter { bootcamp in
+         // return filter
+         return bootcamp.students.contains { bootcampStudent in
+             // return contains
+             return bootcampStudent.name.compare(student.name) == .orderedSame
+         }
+     }
+     
+     if (studentBootcamps.count > 1) {
+         print("Alumno \(student.name) \(studentBootcamps.count) bootcamps")
+     }
+ }
+ */
+
+let studentsMore1Bootcamp: [(name: String, count: Int)] = bootcampStudents.compactMap { student in
+    let studentBootcamps = bootcamps.filter { bootcamp in
+        // return filter
+        return bootcamp.students.contains { bootcampStudent in
+            // return contains
+            return bootcampStudent.name.compare(student.name) == .orderedSame
+        }
+    }
+    
+    // return CompactMap
+    return (studentBootcamps.count > 1 ? (student.name, studentBootcamps.count) : nil)
+}
+
+studentsMore1Bootcamp.forEach { print("Alumno \($0.name) \($0.count) bootcamps") }
+
+
+print()
 print("****** 10.9 ******")
 // Escribir en consola el nombre de los profesores que están en más de un bootcamp
 /* Ejemplo
@@ -1152,6 +1325,7 @@ print("****** 10.9 ******")
  */
 
 
+print()
 print("****** 10.10 ******")
 // Escribir en consola el nombre de cada estudiante y los de sus profesores
 /* Ejemplo
@@ -1161,6 +1335,7 @@ print("****** 10.10 ******")
  */
 
 
+print()
 print("****** 10.11 ******")
 // Escribir en consola el nombre de cada profesor y los de sus alumnos
 /* Ejemplo
@@ -1169,3 +1344,11 @@ print("****** 10.11 ******")
  Miguel
  Alex
  */
+
+
+
+print()
+print("****** 10.12 ******")
+//print(studentNamesSorted.sorted(by: { (name1, name2) -> Bool in
+//    return name1.compare(name2) == .orderedAscending
+//}))
