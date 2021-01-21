@@ -1300,7 +1300,19 @@ let existsStudent: Bool = bootcampStudents.contains { student -> Bool in
  }
  */
 
+/*
+ Podemos utilizar en el closure: $0.age != nil ? $0:nil
+let studentsWithAge: [Student] = bootcampStudents.compactMap { student in
+    if(student.age != nil) {
+        return student
+    } else {
+        return nil
+    }
+}
+ */
+
 let studentsMore1Bootcamp: [(name: String, count: Int)] = bootcampStudents.compactMap { student in
+    // Filter devuelve una lista con los valores de bootcamps que cumplen la condición
     let studentBootcamps = bootcamps.filter { bootcamp in
         // return filter
         return bootcamp.students.contains { bootcampStudent in
@@ -1339,10 +1351,89 @@ print("****** 10.10 ******")
  Sara
  */
 
+/// Filtra la lista de **bootcamps** recibida en base al nombre del **student** y devuelve los bootcamps
+/// que contengan al **student**
+/// - Parameters:
+///   - bootcamps: listado de bootcamps
+///   - student: estudiante a buscar en cada bootcamp
+/// - Returns: Listado de **bootcamps** filtrados
+func filter(bootcamps: [Bootcamp], by student: Student) -> [Bootcamp] {
+    return bootcamps.filter { contains(bootcamp: $0, student: student) }
+}
+
+func contains(bootcamp: Bootcamp, student: Student) -> Bool {
+    return bootcamp.students.contains { areStudentNameEquals(student: $0, other: student) }
+}
+
+func areStudentNameEquals(student: Student, other: Student) -> Bool {
+    return student.name.compare(other.name) == .orderedSame
+}
+
+let studentsTeachersBootcamp: [(name: String, bootcamps: [Bootcamp])] = bootcampStudents.compactMap { student in
+    // Filter devuelve una lista con los valores de bootcamps que cumplen la condición
+    let studentBootcamps = filter(bootcamps: bootcamps, by: student)
+    
+    // return CompactMap
+    return (studentBootcamps.count > 1 ? (student.name, studentBootcamps) : nil)
+}
+
+studentsTeachersBootcamp.forEach { student in
+    var teachers: Set<String> = []
+    student.bootcamps.forEach { $0.teachers.forEach { teachers.insert($0.name) } }
+    
+    print("Alumno \(student.name), \(teachers.count) profesores:")
+    teachers.forEach { print($0) }
+}
 
 print()
 print("****** 10.11 ******")
 // Escribir en consola el nombre de cada profesor y los de sus alumnos
+
+// OBJETIVO: Conseguir la lista de bootcamps de cada profesor
+
+// 1.- Ver cual es la lista de profesores
+// bootcampsTeacher
+
+// 2.- Ir uno a uno por cada profesor de la lista
+// Ejemplo: profesor = "Juan"
+
+// 3.- Ver cual es la lista de bootcamps
+// bootcamps
+
+// 4.- Comprobar cuales son los bootcamps de cada profesor
+
+// 4.1.- Ir uno a uno por cada bootcamp
+
+// 4.1.1.- Comprobar si mi profesor está en la lista de profesores del bootcamp
+
+// 4.1.2- Ir uno a uno por cada profesor del bootcamp
+
+// 4.1.3.- Comprobar si cada profesor del bootcamp es igual a mi profesor ("Juan")
+
+// 4.1.3.1.- Comparar si el nombre del profesor del bootcamp es igual al de mi profesor ("Juan")
+
+// RESULTADO: Lista de bootcamps de cada profesor
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Ejemplo
  Profesor David, 3 alumnos:
  Belén
