@@ -1393,29 +1393,34 @@ print("****** 10.11 ******")
 
 // 1.- Ver cual es la lista de profesores
 // bootcampsTeacher
-
 // 2.- Ir uno a uno por cada profesor de la lista
 // Ejemplo: profesor = "Juan"
-
 // 3.- Ver cual es la lista de bootcamps
 // bootcamps
-
 // 4.- Comprobar cuales son los bootcamps de cada profesor
-
 // 4.1.- Ir uno a uno por cada bootcamp
-
 // 4.1.1.- Comprobar si mi profesor está en la lista de profesores del bootcamp
-
 // 4.1.2- Ir uno a uno por cada profesor del bootcamp
-
 // 4.1.3.- Comprobar si cada profesor del bootcamp es igual a mi profesor ("Juan")
-
 // 4.1.3.1.- Comparar si el nombre del profesor del bootcamp es igual al de mi profesor ("Juan")
 
 // RESULTADO: Lista de bootcamps de cada profesor
+// Ejemplo: teacherBootcampList
 
 
+// OBJETIVO: Conseguir la lista de alumnos de cada bootcamp de cada profesor
 
+// 5.- Ver cual es la lista de todos los estudiantes
+// bootcampsStudents
+// 6.- Ir uno a uno por cada estudiante de la lista
+// 6.1.- Comprobar si mi alumno existe en la lista 'teacherBootcampList'
+// 6.1.1.- Ir uno a uno por cada bootcamp de 'teacherBootcampList'
+// 6.1.1.1.- Comprobar si mi estudiante está en la lista de estudiantes del bootcamp
+// 6.1.1.2.- Ir uno a uno por la lista de estudiantes del bootcamp
+// 6.1.1.2.1- Comprobar si el alumno del bootcamp es igual a mi estudiante
+// 6.1.1.2.2- Comparar si el nombre del alumno del bootcamp es igual al nombre del estudiante
+
+// RESULTADO: Lista de alumnos del profesor
 
 
 
