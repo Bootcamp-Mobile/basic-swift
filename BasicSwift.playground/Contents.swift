@@ -1171,23 +1171,22 @@ class Coche: Vehiculo {
 }
 
 class Moto: Vehiculo {
-    var cilindrada: Int = 1000
+    var cilindrada: Int
     
-    init(modelo: String, ruedas: Int) {
+    init(modelo: String, ruedas: Int, cilindrada: Int) {
+        self.cilindrada = cilindrada
+        
         // En el init del hijo siempre tendremos que llamar
         // al init del padre con super.init()
         super.init(modelo: modelo)
-        
         self.ruedas = ruedas
     }
 }
-
 
 class Bicicleta: Vehiculo {
     var isCascoDisponible: Bool = false
     
 }
-
 
 
 var peugeot = Coche(modelo: "Peugeot")
@@ -1199,7 +1198,8 @@ peugeot.velocidad
 peugeot.frenar()
 
 var honda = Moto(modelo: "Honda",
-                 ruedas: 2)
+                 ruedas: 2,
+                 cilindrada: 1000)
 
 honda.acelerar()
 honda.frenar()
